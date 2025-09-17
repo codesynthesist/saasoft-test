@@ -40,6 +40,7 @@ export const useAccountStore = defineStore('accounts-form', () => {
 
   const removeAccount = (id: string): void => {
     accounts.value = accounts.value.filter(i => i.id !== id)
+    saveToCache()
   }
 
   const saveToCache = () => {
