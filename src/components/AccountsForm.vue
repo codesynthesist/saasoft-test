@@ -25,13 +25,17 @@
         </header>
 
         <main class="form__body">
-          <form>
-            <FormAccount
-              v-for="(account, index) of accounts"
-              :key="index"
-              :account="account"
+            <AccountItem
+              v-for="account of accounts"
+              :key="account.id"
+              :id="account.id"
+              :label="account.label"
+              :type="account.type"
+              :login="account.login"
+              :password="account.password"
+              @update-account="updateAccount"
+              @remove-account="removeAccount"
             />
-          </form>
         </main>
       </section>
     </main>
@@ -39,10 +43,18 @@
 </template>
 
 <script setup lang="ts">
-import FormAccount from '@/components/FormAccount.vue'
+import AccountItem from '@/components/AccountItem.vue'
 import { useAccountStore } from '@/stores/accounts'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
-const { accounts, addAccount } = useAccountStore()
+const accountsStore = useAccountStore()
+const { accounts } = storeToRefs(accountsStore)
+const { addAccount, removeAccount, updateAccount, loadFromCache } = accountsStore
+
+onMounted(() => {
+  loadFromCache()
+})
 </script>
 
 <style scoped lang="scss">
