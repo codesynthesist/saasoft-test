@@ -1,8 +1,10 @@
 <template>
-<h2>Hi</h2>
+  <AccountsForm/>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import AccountsForm from '@/components/AccountsForm.vue'
+
 </script>
 
 <style lang="scss">
